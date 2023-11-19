@@ -41,10 +41,10 @@ int solution(int n, vector<int> lost, vector<int> reserve) {
                  student[i-1]--; student[i]++;      
             }
         
-            if( (i!=0 && student[i-1]==1) && (i!=student.size()-1 && student[i+1]!=1) ){ //왼쪽만
+            if( (student[i-1]==1) && (student[i+1]!=1) ){ //왼쪽만
                 student[i-1]--; student[i]++;
             }
-            else if( (i!=0 && student[i-1]!=1) && (i!=student.size()-1 && student[i+1]==1) ){ //오른쪽만
+            else if( (student[i-1]!=1) && (student[i+1]==1) ){ //오른쪽만
                 student[i+1]--; student[i]++;
             }
         }
