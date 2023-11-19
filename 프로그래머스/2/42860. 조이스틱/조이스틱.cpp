@@ -30,7 +30,8 @@ int solution(string name) {
         while (idx < name.size() && name[idx] == 'A')
             idx++;
 
-
+        // i: [0] -> [i]로 가는 이동 횟수(방향 : 오른쪽)
+        // len(name) - idx: [0] -> [idx]로 가는 이동 횟수(방향 : 왼쪽)
         int left_right = (name.size() - idx) * 2 + i;  //[0] -> [i](오른쪽) -> [idx](왼쪽)
         int right_left = i * 2 + (name.size() - idx);  //[0] -> [idx](왼쪽) -> [i](오른쪽)
         move = min(move, right_left);
@@ -39,9 +40,4 @@ int solution(string name) {
     answer += move; //좌우이동 횟수   
     cout << move << endl;
     return answer;
-}
-
-int main() {
-    cout << solution("JAAABDAA") << endl;
-
 }
