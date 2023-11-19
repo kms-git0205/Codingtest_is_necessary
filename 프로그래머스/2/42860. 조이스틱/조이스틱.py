@@ -16,8 +16,8 @@ def solution(name):
         while idx < len(name) and name[idx] == 'A':
             idx += 1
 
-        # i: [0]에서 오른쪽으로 이동해서 [i]까지 갈 때의 이동 횟수
-        # len(name) - idx: [0]에서 왼쪽으로 이동해서 [idx]까지 갈 때의 이동 횟수
+        # i: [0] -> [i]로 가는 이동 횟수(방향 : 오른쪽)
+        # len(name) - idx: [0] -> [idx]로 가는 이동 횟수(방향 : 왼쪽)
         left_right = (len(name) - idx) * 2 + i  # [0] -> [i](오른쪽) -> [idx](왼쪽)
         right_left = i * 2 + (len(name) - idx)  # [0] -> [idx](왼쪽) -> [i](오른쪽)
 
