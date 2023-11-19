@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <iostream>
 using namespace std;
 /*
 <문제>
@@ -13,28 +14,34 @@ A에서 25번 이동하면 Z
 */
 int solution(string name) {
     int answer = 0;
-    
-    vector<int> exception;  // 예외처리 좌우이동 모음  
-    exception.push_back(name.size()-1); //오른쪽으로 순차적으로 이동
-    int move=exception[0];
-    
-    for(int i=0; i<name.size(); i++){   //알파벳 이동 처리
-        if(name[i]<='N')
-            answer+=(int)name[i]-(int)'A';
+
+    int move = name.size() - 1;
+
+
+    for (int i = 0; i < name.size(); i++) {   //알파벳 이동 처리
+        if (name[i] <= 'N')
+            answer += (int)name[i] - (int)'A';
         else
-            answer+=(int)'Z'-(int)name[i]+1;
-        
-        int idx = i+1;
-        
-        while(idx < name.size() && name[idx]=='A')
+            answer += (int)'Z' - (int)name[i] + 1;
+
+        int idx = i + 1;
+
+        //A가 안나올 때까지 계속 오른쪽으로 idx를 이동
+        while (idx < name.size() && name[idx] == 'A')
             idx++;
-        
-        int left_right = (name.size()-idx)*2+i;
-        int right_left = i*2+(name.size()-idx);
+
+
+        int left_right = (name.size() - idx) * 2 + i;  //[0] -> [i](오른쪽) -> [idx](왼쪽)
+        int right_left = i * 2 + (name.size() - idx);  //[0] -> [idx](왼쪽) -> [i](오른쪽)
         move = min(move, right_left);
         move = min(move, left_right);
     }
-    answer+= move; //좌우이동 횟수   
-        
+    answer += move; //좌우이동 횟수   
+    cout << move << endl;
     return answer;
+}
+
+int main() {
+    cout << solution("JAAABDAA") << endl;
+
 }
