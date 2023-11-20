@@ -3,6 +3,9 @@
 조이스틱 조작 횟수의 최소값 구하기
 처음엔 A로만 이루어져 있음
 
+N <= 20
+
+
 <풀이>
 A에서 25번 이동하면 Z
 
@@ -36,7 +39,7 @@ def solution(name):
             answer += ord('Z') - ord(name[i]) + 1
 
             
-            '''JEAAAEF'''
+            '''JEAAAEFAAAAAAEDF'''
         idx = i + 1
 
         # A가 안나올 때까지 계속 오른쪽으로 idx를 이동
