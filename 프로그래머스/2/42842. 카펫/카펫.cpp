@@ -21,6 +21,8 @@ yellow 가 (가로 - 2)랑 나누어 떨어짐
           = 2*가로 + 2*yellow/(가로-2)
  -> 좀 편하게, 
     brown/2 = 가로 + yellow/(가로-2)
+    
+    
 가로를 i로 두고 반복문 돌리기
  
 정리하면,
@@ -47,9 +49,9 @@ vector<int> solution(int brown, int yellow) {
 
     //가로가 세로보다 크거나 같으므로, 가로 크기를 yellow부터 1까지 역순으로 봄
     for (int i = yellow; i >=1; i--) {
-        if (yellow% i == 0 && i + yellow / i + 2 == brown) {    //brown/2 : i+2 + yellow/i (비교해보는거)
+        if (yellow% i == 0 && i + 2 + yellow / i == brown) {    //brown/2 : i+2 + yellow/i (비교해보는거)
                 answer.push_back(i+2);          //가로 : i+2(가로는 최소 3)
-                answer.push_back(yellow/i+2);   //세로 : yellow/i + 2,     
+                answer.push_back(yellow/i+2);   //세로 : yellow/i + 2   
             break;
         }
     }
