@@ -7,8 +7,6 @@ using namespace std;
 /*
 <문제>
 
-1645 시작
-
 직사각형 보드에 빨강, 파랑 구슬 하나씩 넣고 
 빨간 구슬을 구멍을 통해 빼내는 게임
 
@@ -20,7 +18,6 @@ using namespace std;
 기울이기를 통해 굴리고, 구슬이 움직이지 않을 때 까지 기울임
 
 보드 상태가 주어졌을 때, 최소 몇 번 만에 빨간 구슬을 뺄 수 있는지 구하기
-
 
 
 입력:
@@ -52,7 +49,6 @@ N개 줄
 
 <시간>
 O(4^10) -> 1048576번
-
 */
 
 
@@ -76,10 +72,6 @@ Situation MoveOne(vector<string> pan, int way, pair<int, int> red, pair<int, int
 	int rx = red.first, ry = red.second, bx = blue.first, by = blue.second;
 	bool is_hole = false;	//구멍 도착 여부
 
-
-	//cout << "이동 전 Situation - " << "red:" << red.first << " " << red.second << " , blue : " << blue.first << " " << blue.second << endl;
-
-
 	if (way == 1) {	//상
 
 		while (rx >= 0 && pan[rx][ry] == '.') { rx--; } rx++;
@@ -91,8 +83,6 @@ Situation MoveOne(vector<string> pan, int way, pair<int, int> red, pair<int, int
 
 		if (rx == bx && ry == by && red.first < blue.first && !is_hole) bx++;
 		else if (rx == bx && ry == by && red.first > blue.first && !is_hole) rx++;
-
-		//cout << "상";// << endl;
 	}
 	else if (way == 2) {	//하
 		
@@ -104,8 +94,6 @@ Situation MoveOne(vector<string> pan, int way, pair<int, int> red, pair<int, int
 
 		if (rx == bx && ry == by && red.first < blue.first && !is_hole) rx--;
 		else if (rx == bx && ry == by && red.first > blue.first && !is_hole) bx--;
-
-		//cout << "하";// << endl;
 	}
 	else if (way == 3) {	//좌
 
@@ -117,8 +105,6 @@ Situation MoveOne(vector<string> pan, int way, pair<int, int> red, pair<int, int
 
 		if (rx == bx && ry == by && red.second < blue.second && !is_hole) by++;
 		else if (rx == bx && ry == by && red.second > blue.second && !is_hole) ry++;
-
-		//cout << "좌";// << endl;
 	}
 	else if (way == 4) {	//우
 
@@ -130,13 +116,9 @@ Situation MoveOne(vector<string> pan, int way, pair<int, int> red, pair<int, int
 
 		if (rx == bx && ry == by && red.second < blue.second && !is_hole) ry--;
 		else if (rx == bx && ry == by && red.second > blue.second && !is_hole) by--;
-
-		//cout << "우";// << endl;
 	}
 
 	red.first = rx, red.second = ry, blue.first = bx, blue.second = by;
-	//cout << "이동 후 Situation - " << "red:" << red.first << " " << red.second << " , blue : " << blue.first << " " << blue.second << endl << endl;
-
 	return Situation(red, blue);
 
 }
@@ -160,51 +142,25 @@ int getAns(vector<string> pan, int cnt, pair<int, int>red, pair<int, int>blue, i
 	if (cnt > 10) return MAXX;
 
 	//끝나는 경우
-	if (pan[red.first][red.second] == 'O' && pan[blue.first][blue.second] != 'O') {
-		//cout << "조건 만족! cnt는? " << cnt << endl;
+	if (pan[red.first][red.second] == 'O' && pan[blue.first][blue.second] != 'O')
 		return cnt;
-	}
-
-
 
 	for (int i = 1; i <= 4; i++) {	//상하좌우 기울인 후, 판단
 		
 		//이건 이동만
 		if (i == reverse(prev)) continue;	//이전 방향의 반대방향이면 건너뛰기
 		Situation tmp = MoveOne(pan, i, red, blue);	//red/blue 공 위치, cnt만 반환(pan은 어차피 같음)
-		
 
 		int res;
 
 		if (tmp.red == red && tmp.blue == blue) res = MAXX;	//움직임 변동이 없으면 끝
-		else {
-			//cout << "Situation - " << "red:" << tmp.red.first << " " << tmp.red.second << " , blue : " << tmp.blue.first << " " << tmp.blue.second << endl;
+		else res = getAns(pan, cnt + 1, tmp.red, tmp.blue, i);
 
-		/*	for (int ii = 0; ii < pan.size(); ii++) {
-				for (int jj = 0; jj < pan[0].size(); jj++) {
-					if (ii == tmp.red.first && jj == tmp.red.second) cout << "R";
-					else if (ii == tmp.blue.first && jj == tmp.blue.second)cout << "B";
-					else cout << pan[ii][jj];
-				}
-				cout << endl;
-			}*/
-
-
-			//cout << "" << endl;//새로운 주기 시작
-			res = getAns(pan, cnt + 1, tmp.red, tmp.blue, i);
-		}
-
-		if (res < minn) {
-			//cout << "여기 오긴 함?" << endl;
-			minn = res;
-		}
+		if (res < minn) minn = res;
 	}
 
-
 	if (minn == MAXX) return MAXX;
-	else {// cout << "\n\n하나 끝\n-> 이 때 cnt : " << minn << endl << endl; 
-		return minn; }
-
+	else return minn;
 }
 
 int main() {
@@ -241,5 +197,3 @@ int main() {
 
 	return 0;
 }
-
-// 상 좌 하
