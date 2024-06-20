@@ -1,0 +1,28 @@
+# 데이터 파일 읽기 예제
+import pandas as pd
+df = pd.read_csv("data/nf.csv")
+
+
+df['date_added'] = pd.to_datetime(df['date_added'])
+
+cond1 = df.date_added.dt.year==2018
+cond2 = df.date_added.dt.month==1
+cond3 = df.country=='United Kingdom'
+# 사용자 코딩
+
+# 답안 제출 예시
+
+# print(      df.info()    )
+print(      len(df[cond1 & cond2 & cond3])   )
+
+
+print(          )
+print(          )
+print(          )
+print(          )
+print(          )
+print(          )
+print(          )
+print(          )
+
+# print(평균변수값)
