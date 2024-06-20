@@ -1,0 +1,17 @@
+# 출력을 원할 경우 print() 함수 활용
+# 예시) print(df.head())
+
+# 데이터 파일 읽기 예제
+import pandas as pd
+df = pd.read_csv("data/basic1.csv")
+
+
+
+# 사용자 코딩
+
+print(round( df['age'].quantile(0.75) - df['age'].quantile(0.25) ))
+
+
+# 답안 제출 예시
+# print(평균변수값)
+
