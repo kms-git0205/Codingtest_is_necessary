@@ -1,0 +1,19 @@
+# 데이터 파일 읽기 예제
+import pandas as pd
+df = pd.read_csv("data/fb.csv")
+
+
+# 사용자 코딩
+
+df['target']= (df.loves + df.wows) / df.reactions
+
+cond1 = df.target > 0.4
+cond2 = df.target < 0.5
+cond3 = df.type == 'video'
+
+print(  len(df[cond1 & cond2 & cond3])   )
+
+
+
+# 답안 제출 예시
+# print(평균변수값)
